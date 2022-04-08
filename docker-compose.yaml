@@ -11,3 +11,5 @@ services:
     environment:
       - TZ=Etc/UTC
     restart: always
+    ports:
+      - "8888:8888"
