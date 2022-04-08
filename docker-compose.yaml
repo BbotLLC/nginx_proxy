@@ -6,8 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: nginx_proxy
-    volumes:
-      - /usr/local/nginx/conf/nginx.conf
     environment:
       - TZ=Etc/UTC
     restart: always
