@@ -8,7 +8,6 @@ services:
     container_name: nginx_proxy
     volumes:
       - ./nginx.conf:/usr/local/nginx/conf/nginx.conf
-      - ./auth_file:/usr/local/nginx/conf/auth_file
     environment:
       - TZ=Etc/UTC
     restart: always
