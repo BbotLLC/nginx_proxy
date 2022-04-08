@@ -7,7 +7,7 @@ ADD https://github.com/krallin/tini/releases/download/v0.19.0/tini /tini
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y libfontconfig1 libpcre3 libpcre3-dev git dpkg-dev libpng-dev libssl-dev && \
+    apt-get install -y libfontconfig1 libpcre3 libpcre3-dev git dpkg-dev libpng-dev libssl-dev apache2-utils && \
     apt-get source nginx && \
     git clone https://github.com/chobits/ngx_http_proxy_connect_module && \
     cd /app/nginx-* && \
