@@ -28,5 +28,5 @@ ssh-keygen -t ed25519 -C {your_email_here}
 cat ~/.ssh/id_ed25519.pub
 
 # Add SSH public key to your github public keys so that repository can be pulled
-git pull git@github.com:BbotLLC/nginx_proxy.git
+git clone git@github.com:BbotLLC/nginx_proxy.git
 ```
