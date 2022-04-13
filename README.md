@@ -21,10 +21,8 @@ Now the Docker container is running with the mounted configuration.
 If anything goes wrong with the proxy server, we should simply be able to restart the Docker container.  If the ec2 needs to be re-created though, you can follow these commands and steps to get set up.
 
 ```
-# Add your email instead of the placeholder
+# Add your email instead of the placeholder.  Enter and confirm your password when prompted
 ssh-keygen -t ed25519 -C {your_email_here}
-# Enter password when prompted
-# Confirm password
 
 # Copy SSH public key to clipboard
 cat ~/.ssh/id_ed25519.pub
