@@ -9,8 +9,26 @@ This proxy is used for the Agilysys integration so that all outgoing API calls c
 
 ## Running Proxy Server
 ```
+# generate ssh key
+ssh-keygen -t ed25519 -C {your_email}
 docker run -d -p 8888:8888 -v ${PWD}/nginx_whitelist.conf:/usr/local/nginx/conf/nginx.conf reiz/nginx_proxy:0.0.3 
 ```
 
 Now the Docker container is running with the mounted configuration.
 
+## Setting up the ec2 instance
+
+If anything goes wrong with the proxy server, we should simply be able to restart the Docker container.  If the ec2 needs to be re-created though, you can follow these commands and steps to get set up.
+
+```
+# Add your email instead of the placeholder
+ssh-keygen -t ed25519 -C {your_email_here}
+# Enter password when prompted
+# Confirm password
+
+# Copy SSH public key to clipboard
+cat ~/.ssh/id_ed25519.pub
+
+# Add SSH public key to your github public keys so that repository can be pulled
+git pull git@github.com:BbotLLC/nginx_proxy.git
+```
