@@ -9,22 +9,13 @@ This proxy is used for the Agilysys integration so that all outgoing API calls c
 
 ## Running Proxy Server
 ```
-# Install Docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
-# Edit $http_x_proxy_auth != "" in nginx.conf (the one in this repo) to include the Agilysys proxy header secret.
-# cm-django-prod-agilysys-proxy-header-secret in AWS Parameter Store
-
 # From this git directory, Start the Docker container
 docker-compose up -d
 ```
 
-Now the Docker container is running with the mounted configuration.
-
 ## Setting up the ec2 instance
 
-If anything goes wrong with the proxy server, we should simply be able to restart the Docker container.  If the ec2 needs to be re-created though, you can follow these commands and steps to get set up.
+If anything goes wrong with the proxy server, we should simply be able to restart the Docker container.  If the ec2 needs to be re-created though, you can follow these commands and steps to get set up.  Note that port 8888 on the ec2 instance needs to allow all TCP connections for this proxy to be accessible.
 
 ```
 # Add your email instead of the placeholder.  Enter and confirm your password when prompted
@@ -35,4 +26,11 @@ cat ~/.ssh/id_ed25519.pub
 
 # Add SSH public key to your github public keys so that repository can be pulled
 git clone git@github.com:BbotLLC/nginx_proxy.git
+
+# Install Docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Edit $http_x_proxy_auth != "" in nginx.conf (the one in this repo) to include the Agilysys proxy header secret.
+# cm-django-prod-agilysys-proxy-header-secret in AWS Parameter Store
 ```
