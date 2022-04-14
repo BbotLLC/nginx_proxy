@@ -9,9 +9,15 @@ This proxy is used for the Agilysys integration so that all outgoing API calls c
 
 ## Running Proxy Server
 ```
-# generate ssh key
-ssh-keygen -t ed25519 -C {your_email}
-docker run -d -p 8888:8888 -v ${PWD}/nginx_whitelist.conf:/usr/local/nginx/conf/nginx.conf reiz/nginx_proxy:0.0.3 
+# Install Docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Edit $http_x_proxy_auth != "" in nginx.conf (the one in this repo) to include the Agilysys proxy header secret.
+# cm-django-prod-agilysys-proxy-header-secret in AWS Parameter Store
+
+# From this git directory, Start the Docker container
+docker-compose up -d
 ```
 
 Now the Docker container is running with the mounted configuration.
