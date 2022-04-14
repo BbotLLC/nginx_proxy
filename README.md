@@ -31,6 +31,6 @@ git clone git@github.com:BbotLLC/nginx_proxy.git
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# Edit $http_x_proxy_auth != "" in nginx.conf (the one in this repo) to include the Agilysys proxy header secret.
+# Edit $http_x_proxy_auth != "" in nginx.conf on the ec2 (this file is included in this repo but should not be edited in source control) to include the Agilysys proxy header secret.
 # cm-django-prod-agilysys-proxy-header-secret in AWS Parameter Store
 ```
