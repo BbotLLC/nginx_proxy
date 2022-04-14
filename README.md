@@ -1,8 +1,3 @@
-# Nginx forward proxy
-
-[Nginx](https://nginx.org/en/) is a very fast HTTP and reverse proxy server. 
-Usually, Nginx is used to serve and cache static assets or as proxy or load balancer for incoming traffic to application servers. In this repository, it is used as forward proxy.  This repository uses the third party ngx_http_proxy_connect (https://github.com/chobits/ngx_http_proxy_connect_module) repository to enable forward HTTPS proxy.  A copy of that repository is included in this one as a backup.
-
 ## Use Case
 
 This proxy is used for the Agilysys integration so that all outgoing API calls come from a static IP address.  The static IP address is configured in AWS Elastic IP (agilysys-proxy-server-static-ip).  The python API calls must also be configured to send through the proxy server for this to be used correctly.
@@ -31,6 +26,14 @@ git clone git@github.com:BbotLLC/nginx_proxy.git
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# Edit $http_x_proxy_auth != "" in nginx.conf on the ec2 (this file is included in this repo but should not be edited in source control) to include the Agilysys proxy header secret.
-# cm-django-prod-agilysys-proxy-header-secret in AWS Parameter Store
+# Edit $http_x_proxy_auth != "" in nginx.conf on the ec2 to include the Agilysys proxy header secret.
+# Note that this file is included in this repo but the edit should not be comitted to source control.
+# cm-django-prod-agilysys-proxy-header-secret is the parameter name in AWS Parameter Store
 ```
+
+## Authorization
+This proxy uses basic secret key authentication to restrict access.  The X-PROXY-AUTH header should be included in proxied HTTP requests for validation.  The secret is stored in AWS parameter store and is inserted into the nginx.conf file on the ec2 server (instructions for that above).
+
+## Python Setup
+
+Code changes in Python should not be required to get Agilysys to work with this proxy server.  In the case they are needed, however, all API requests to Agilysys services should be made through this proxy.
