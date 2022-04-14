@@ -32,9 +32,6 @@ RUN apt-get install -y --no-install-recommends libssl-dev && \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
-    
-RUN apt-get install -y apache2-utils && \
-    htpasswd -b -c /usr/local/nginx/conf/.auth_file user1 test
 
 EXPOSE 8888
 
